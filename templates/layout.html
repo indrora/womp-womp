@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="{{ url_for('static', filename="pico.css") }}">
+    <title>5XB PROCON punch</title>
+  </head>
+  <body>
+    <main class="container">
+
+      <nav>
+  <ul>
+    <li><a href="{{url_for('index')}}"><strong>5XB Punch</strong></a></li>
+  </ul>
+  <ul>
+    <li><a href="{{url_for('list_cards')}}">Latest</a></li>
+    <li><a href="#">Stats</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+</nav>
+    {% block content %}
+	  <h1>5XB PROCON punch</h1>
+	  {% endblock %}
+    </main>
+  </body>
+</html>
