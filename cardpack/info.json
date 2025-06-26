@@ -1,0 +1,29 @@
+{
+    "images": {
+        "front": "front2.png",
+        "back": "back.png"
+    },
+
+    "offsets": {
+        "front": {
+            "origin": [684, 112],
+            "offset": [97.88, 98.35],
+            "labels": [
+                ["id", 3700,500],
+                ["office", 7600,690],
+                ["smalltime", 3950,1300],
+                ["smalldate", 4200,1300],
+                ["month", 7800, 130],
+                ["year", 7800, 200]
+            ]
+        },
+        "back": {
+            "origin": [690, 1782],
+            "offset": [97.44, -98.12],
+            "labels": []
+        }
+    },
+
+    "labelfont": "tEggst-Regular.otf",
+    "labelsize": 40
+}
