@@ -1,6 +1,6 @@
 {
     "images": {
-        "front": "front2.png",
+        "front": "front.png",
         "back": "back.png"
     },
 
@@ -9,8 +9,7 @@
             "origin": [684, 112],
             "offset": [97.88, 98.35],
             "labels": [
-                ["id", 3700,500],
-                ["office", 7600,690],
+                ["office", 7600,640],
                 ["smalltime", 3950,1300],
                 ["smalldate", 4200,1300],
                 ["month", 7800, 130],
@@ -24,6 +23,6 @@
         }
     },
 
-    "labelfont": "tEggst-Regular.otf",
-    "labelsize": 40
+    "labelfont": "KleeOne-SemiBold.ttf",
+    "labelsize": 50
 }

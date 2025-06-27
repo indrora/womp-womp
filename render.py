@@ -19,7 +19,7 @@ class CardRenderer:
         im=Image.open(os.path.join(self.asset_dir, self.info['images'][side]))
 
         label_data = {
-            'id': card.id.string(),
+            'id': str(card.id),
             'date': card.timestamp,
             'punchdate': punchdate,
             'office': "Duwamish",

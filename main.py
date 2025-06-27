@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template, g 
 import os
-
+from card import Troublecard
 from storage import Cardfile
 app = Flask(__name__)
 
@@ -40,6 +40,9 @@ def close_db(response):
         g.pop('cardfile', None)
     return response
 
+
+# card intake function.
+
 @app.route('/card', methods=['POST'])
 def create_card():
     cardfile = get_db()
@@ -50,8 +53,12 @@ def create_card():
     if not card_data:
         return jsonify({"error": "No card data provided"}), 400
 
-    card_id = cardfile.insert(card_data)
-    return jsonify({"id": card_id}), 201
+    # load the card data intoa real troublcard object
+
+    card_data = split_card(card_block)
+    card = Troublecard.from_raw(card_data)
+    # insert the card into the database
+    id = cardfile.insert(card)
 
 
 

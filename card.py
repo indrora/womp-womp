@@ -1,14 +1,13 @@
 """
 Card management
 """
-
-from xid import XID
+from  cyksuid.v2 import ksuid, parse
 import datetime
 
 class Troublecard:
     def __init__(self):
         self.bits = []
-        self.id = XID()
+        self.id = ksuid()
         self.timestamp = datetime.datetime.now()
     
     def from_raw(raw):
@@ -192,16 +191,3 @@ if __name__ == "__main__":
     im = renderer.render_card(card)
     im.save("card.png")
     print(" - Done - ")
-
-
-    # card = decode_block(card_block)
-    # print(print_cardx(card))
-    # print(print_card(card))
-    # storecard = {
-    #     "id": "123456789",
-    #     "value": card,
-    #     "timestamp": "2023-04-10T12:34:56Z"
-    # }
-    # import render
-    # img = render.punch_card(storecard)
-    # img.save("card.png")
