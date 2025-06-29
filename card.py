@@ -3,6 +3,7 @@ Card management
 """
 from  cyksuid.v2 import ksuid, parse
 import datetime
+import json
 
 class Troublecard:
     def __init__(self):
@@ -50,10 +51,19 @@ class Troublecard:
         return card
     
     def to_json(self):
-        pass
+        return json.dumps({
+            'bits': self.bits,
+            'id': str(self.id),
+            'timestamp': self.timestamp.isoformat()
+        },sort_keys=True)
     
-    def from_json(json):
-        pass
+    def from_json(json_txt):
+        jj = json.loads(json_txt)
+        card = Troublecard()
+        card.bits = jj['bits']
+        card.id = parse(jj['id'])
+        card.timestamp = datetime.datetime.fromisoformat(jj['timestamp'])
+        return card
 
     def analyze(self):
         pass
@@ -97,79 +107,6 @@ scanpts_order = [
     [115,       114,       113,       112,        111, 110, 109, 108, 'RSV14.8', 'RSV14.9'],
     ['RSV15.0', 'RSV15.1', 'RSV15.2', 'RSV15.3',  119, 118, 117, 116, 'RSV15.8', 'RSV15.9']
     ]
-
-def scan_data_to_card(data):
-    card = [[False for x in range(69)] for y in range(18)]
-
-
-    for scan_group in range(9):
-        for i in range(16):
-            for j in range(8):
-                row = 8 - scan_group
-                scanpt_val = scanpts_order[i][j]
-                if isinstance(scanpt_val, int):
-                    col = scanpt_val % 30
-                    if 0 <= scanpt_val and scanpt_val <= 29:
-                        row += 9
-                    if 30 <= scanpt_val and scanpt_val <= 59:
-                        row += 9
-                        col += 39
-                    if 60 <= scanpt_val and scanpt_val <= 89:
-                        pass
-                    if 90 <= scanpt_val and scanpt_val <= 119:
-                        col += 39
-                elif scanpt_val == 'BWX0':
-                    col = 30
-                    row += 9
-                elif scanpt_val == 'BWX1':
-                    col = 38
-                    row += 9
-                elif scanpt_val == 'BWX2':
-                    col = 30
-                elif scanpt_val == 'BWX3':
-                    col = 38
-
-                if (((data[scan_group * 16 + i] >> j) & 1) == 1) and isinstance(scanpt_val, int):
-                    if row < 18 and col < 69:
-                        card[row][col] = True
-                    else:
-                        print("???")
-    return card
-
-def print_card(card):
-    text = ''
-    text += ('+'+('—'*69)+'+\n')
-    for y in range(18):
-        text += ('|')
-        for x in range(69): #nice
-            if x==31 or x==37:
-                text += ('|')
-            elif x>31 and x<37:
-                text += (' ')
-            else:
-                text += ('#' if card[y][x] else '·')
-        text += ('|\n')
-    text += ('+'+('—'*69)+'+\n')
-    return text
-
-def print_cardx(card):
-    text = ''
-    for y in range(len(card)):
-        text += ' '
-        for x in range(len(card[y])):
-            
-            if card[y][x]:
-                text += '#'
-            else:
-                text += '·'
-        text += '\n'
-    return text
-
-def decode_block(data):
-    split_data = data.split(',')
-    decoded_data = list(map(lambda x: int(x, 16), split_data))
-    card = scan_data_to_card(decoded_data)
-    return card
 
 def split_card(data):
     split_data = data.split(',')

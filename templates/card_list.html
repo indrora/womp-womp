@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1>Recent Cards</h1>
+
+
+<table>
+    <thead>
+        <td>CardID</td>
+        <td>Timestamp</td>
+        <td>Action</td>
+    </thead>
+    {% for card in cards %}
+    
+    <tr>
+        <td>{{card.id}}</td>
+        <td>{{card.timestamp}}</td>
+        <td><a href="{{url_for('get_card', card_id=card.id)}}">View</a></td>
+
+    </tr>
+    
+    {% else %}
+    <p>No cards yet.</p>
+    {% endfor %}
+</table>
+
+{% if cursor %}
+<a href="{{url_for('list_cards', after=cursor)}}">Next &gt;&gt;</a>
+    {% endif %}
+{% endblock %}

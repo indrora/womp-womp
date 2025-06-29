@@ -45,7 +45,6 @@ class CardRenderer:
                     draw.circle((xcen, ycen), holesize, 'black')
         
         for name,xpos,ypos in self.info['offsets'][side]['labels']:
-            print(name, label_data[name],xpos,ypos)
             draw.text((xpos, ypos), label_data[name], font=self.font, fill='red')
             
         rgb_im  = im.convert('RGB')

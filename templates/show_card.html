@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Card {{card.id}}</h1>
+<p>Timestamp: {{card.timestamp}}</p>
+
+<img src="{{url_for('get_card_image', card_id=card.id)}}" alt="Card image">
+
+<pre>TODO: Card info...</pre>
+
+{% endblock %}
