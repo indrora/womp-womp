@@ -65,9 +65,6 @@ class Troublecard:
         card.timestamp = datetime.datetime.fromisoformat(jj['timestamp'])
         return card
 
-    def analyze(self):
-        pass
-
     def __str__(self):
         return f"Troublecard {self.id}"
     

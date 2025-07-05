@@ -15,6 +15,7 @@ class CardRenderer:
     def render_card(self, card:Troublecard, side='front', holesize=15):
         now = datetime.datetime.now()
         punchdate = now.strftime("%y-%m-%d_%H-%M")
+
         bits = card.bits
         im=Image.open(os.path.join(self.asset_dir, self.info['images'][side]))
 
@@ -23,10 +24,10 @@ class CardRenderer:
             'date': card.timestamp,
             'punchdate': punchdate,
             'office': "Duwamish",
-            'month': now.strftime("%m"),
-            'year': now.strftime("%Y"),
-            'smalldate': now.strftime("%m/%d"),
-            'smalltime': now.strftime("%H:%M"),
+            'month': card.timestamp.strftime("%m"),
+            'year': card.timestamp.strftime("%Y"),
+            'smalldate': card.timestamp.strftime("%m/%d"),
+            'smalltime': card.timestamp.strftime("%H:%M"),
         }
 
         origin_x, origin_y = self.info['offsets'][side]['origin']

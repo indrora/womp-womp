@@ -3,4 +3,6 @@
 {% block content %}
 <h1>Connections Museum Virual SCC</h1>
 <p> Virual SCC status: online? </p>
+<h2>Latest Card</h2>
+<img src="{{url_for('get_card_image', card_id=latest_card.id)}}" alt="Latest card image">
 {% endblock %}

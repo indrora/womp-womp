@@ -5,6 +5,8 @@ from card import Troublecard, split_card
 from storage import Cardfile
 from render import CardRenderer
 
+from analysis import analyze_card
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -14,7 +16,10 @@ app.config.from_prefixed_env("SCC")
 # Basic front page
 @app.route('/')
 def index():
-    return render_template('index.html')
+    db = get_db()
+    latest = db.most_recent_id()
+    latest_card = db.get(latest)
+    return render_template('index.html', latest_card=latest_card)
 
 # List of current cards.
 @app.route('/cards/', methods=['GET'])
@@ -31,7 +36,7 @@ def get_card(card_id):
     db = get_db()
     card = db.get(card_id)
     if card:
-        return render_template('show_card.html', card=card)
+        return render_template('show_card.html', card=card, analysis=analyze_card(card))
     else:
         return "Not Found", 404
 
@@ -86,4 +91,4 @@ def create_card():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080)
+    app.run(debug=True, host='0.0.0.0', port=8080)

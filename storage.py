@@ -1,6 +1,6 @@
 import json
 import datetime
-from rocksdict import Rdict, Options
+from rocksdict import Rdict, Options, ReadOptions
 from cyksuid.v2 import ksuid, parse
 from card import Troublecard
 import threading
@@ -55,11 +55,9 @@ class Cardfile:
 
     def most_recent_id(self):
         with self.lock:
-            keys = self.db.keys(backwards=True, limit=1)
-            if len(keys) > 0:
-                return keys[0]
-            else:
-                return None
+            iter = self.db.iter()
+            iter.seek_to_last()
+        return iter.key()
     
     
 

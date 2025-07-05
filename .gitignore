@@ -4,3 +4,4 @@ cards.db
 cards.db-shm
 cards.db-wal
 __pycache__/**
+card.png
